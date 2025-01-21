@@ -1,0 +1,14 @@
+-- 대장균 개체의 ID(ID)와 자식의 수(CHILD_COUNT)를 출력
+-- 자식이 없다면 자식의 수는 0으로 출력 => COALESCE(CHILD_COUNT, "0");
+-- 개체의 ID 에 대해 오름차순 정렬
+
+-- GENOTYPE
+-- 5 101
+-- 3 11
+-- 4 100
+-- 6 110
+-- 22 10110
+SELECT A.ID, COALESCE(COUNT(B.PARENT_ID), 0) AS CHILD_COUNT
+FROM ECOLI_DATA A LEFT JOIN ECOLI_DATA B ON A.ID = B.PARENT_ID
+GROUP BY A.ID
+ORDER BY A.ID;
